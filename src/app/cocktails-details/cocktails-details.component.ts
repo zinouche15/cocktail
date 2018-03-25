@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Cocktail } from '../shared/cocktail.model';
+import { DataService } from '../shared/data.service';
 
 @Component({
   selector: 'app-cocktails-details',
@@ -6,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cocktails-details.component.css']
 })
 export class CocktailsDetailsComponent implements OnInit {
-name: string;
-  constructor() {
-    this.name='Bienvenue sur mon site de recette de cocktails';
-   }
+  cocktail: Cocktail[];
 
-  ngOnInit() {
-  }
+ constructor(private data: DataService) { }
+ ngOnInit() {
+   this.data.currentCocktail.subscribe(cocktail => this.cocktail = cocktail);
+ }
+
+
 
 }
